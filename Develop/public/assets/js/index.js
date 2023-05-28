@@ -1,9 +1,13 @@
+//this index.js file adds functionality to the nothes.html page
+//this variables are declared to store references to various elements in the html 
 let noteTitle;
 let noteText;
 let saveNoteBtn;
 let newNoteBtn;
 let noteList;
 
+//this conditional checks if the current URL path is /notes, if true it initializes the 
+//variables by selecting the corresponding elements from the DOM
 if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
   noteText = document.querySelector('.note-textarea');
@@ -25,6 +29,7 @@ const hide = (elem) => {
 // activeNote is used to keep track of the note in the textarea
 let activeNote = {};
 
+//sends a GET request to /api/notes to retrieve the notes from the server
 const getNotes = () =>
   fetch('/api/notes', {
     method: 'GET',
@@ -33,6 +38,7 @@ const getNotes = () =>
     },
   });
 
+//sends a POST request to /api/notes to save a new note on the server
 const saveNote = (note) =>
   fetch('/api/notes', {
     method: 'POST',
@@ -42,6 +48,7 @@ const saveNote = (note) =>
     body: JSON.stringify(note),
   });
 
+//sends a DELETE request to /api/notes to delete a note with a specified ID 
 const deleteNote = (id) =>
   fetch(`/api/notes/${id}`, {
     method: 'DELETE',
@@ -50,6 +57,8 @@ const deleteNote = (id) =>
     },
   });
 
+//Rendering functions
+//renderActiveNote() updates the UI based on the currently selected active note
 const renderActiveNote = () => {
   hide(saveNoteBtn);
 
@@ -66,6 +75,8 @@ const renderActiveNote = () => {
   }
 };
 
+//when the save button is clicked, it creates a new note object from the tittle and text inputs
+//sends a request to save the note to the server 
 const handleNoteSave = () => {
   const newNote = {
     title: noteTitle.value,
@@ -171,6 +182,7 @@ const renderNoteList = async (notes) => {
 };
 
 // Gets notes from the db and renders them to the sidebar
+//getAndRenderNotes() is called to retrieve the notes from the server and render them in the sidebar
 const getAndRenderNotes = () => getNotes().then(renderNoteList);
 
 if (window.location.pathname === '/notes') {
