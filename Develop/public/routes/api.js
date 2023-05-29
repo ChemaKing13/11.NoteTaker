@@ -22,7 +22,7 @@ router.get('/notes', (req, res) => {
 
 // Create a new note
 router.post('/notes', (req, res) => {
-  fs.readFile(path.join(__dirname, '../db/db.json'), 'utf-8', (err, data) => {
+  fs.readFile(path.join(__dirname, './db/db.json'), 'utf-8', (err, data) => {
     if (err) {
       console.error(err);
       res.status(500).json({ error: 'Failed to read notes from the database' });
@@ -43,7 +43,7 @@ router.post('/notes', (req, res) => {
     notes.push(newNote);
 
     // Write the updated notes array back to the db.json file
-    fs.writeFile(path.join(__dirname, '../db/db.json'), JSON.stringify(notes), (err) => {
+    fs.writeFile(path.join(__dirname, './db/db.json'), JSON.stringify(notes), (err) => {
       if (err) {
         console.error(err);
         res.status(500).json({ error: 'Failed to save the new note' });
