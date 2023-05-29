@@ -1,7 +1,7 @@
 const express = require('express'); 
 const path = require('path');
-const { clog } = require('../middleware/clog');
-const apiRoutes = require('./routes/api'); 
+const { clog } = require('./Develop/middleware/clog');
+const apiRoutes = require('./Develop/public/routes/api'); 
 
 
 
@@ -16,16 +16,16 @@ app.use(clog);
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true }));
 app.use('/api', apiRoutes);  
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, 'develop', 'public')));
 
 //Get route for homepage
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/index.html'))
+  res.sendFile(path.join(__dirname, 'develop', 'public', 'index.html'))
 }); 
 
 //GET route for the notes page
 app.get('/notes', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/notes.html')); 
+  res.sendFile(path.join(__dirname, 'develop', 'public', 'notes.html')); 
 }); 
 
 
