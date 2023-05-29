@@ -59,6 +59,46 @@ router.post('/notes', (req, res) => {
   });
 });
 
+//Delete a note 
+//id is a route parameter that represents the ID of the note to be deleted 
+router.delete('/notes/:id', (req, res) => {
+  const noteId = req.params.id;  //here we extract the id from the note that will be deleted 
+
+  fs.readFile(path.join(__dirname, '../db/db.json'), 'utf-8', (err, data) => {
+    if (err) {
+      console.error(err); 
+      res.status(500).json({ error: 'Failed to read notes from the database '}); 
+      return; 
+    }
+
+    let notes = JSON.parse(data); 
+
+    //find the index of the note with the given id
+    const noteIndex = notes.findIndex((note) => note.id === noteId); 
+
+    //if the note is not found the code sends a 404 erorr indicating that the note wasnt found
+    if (noteIndex === -1) {
+      res.status(404).json({ erorr: 'Note not found'}); 
+      return; 
+    }
+
+    //else the note its removed from the array using notes.splice()
+    //remove the note from the array 
+    notes.splice(noteIndex, 1); 
+
+    //Write the updated notes array to the db.json file 
+    fs.writeFile(path.join(__dirname, '../db/db.json'), JSON.stringify(notes), (err) => {
+      if (err) {
+        console.error(err); 
+        res.status(500).json({ error: 'Failed to delete note'}); 
+        return; 
+      }
+      res.status(204).send(); 
+    }); 
+  });
+}); 
+
+
 
 //exports the router module so that it can be used in other files 
 module.exports = router;
