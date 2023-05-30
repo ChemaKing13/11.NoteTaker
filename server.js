@@ -24,6 +24,7 @@ app.get('/', (req, res) => {
 }); 
 
 //GET route for the notes page
+//its defininfg a route fot the URL path /notes, using the HTTP GET method and sends the notes.html file
 app.get('/notes', (req, res) => {
   res.sendFile(path.join(__dirname, 'develop', 'public', 'notes.html')); 
 }); 
