@@ -16,11 +16,6 @@ app.use(express.json());
 app.use(express.static('public'));
 
 
-//Get route for homepage
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, './public/index.html'))
-}); 
-
 
 app.use('/api', apiRoutes);  
 
@@ -31,6 +26,10 @@ app.get('/notes', (req, res) => {
   res.sendFile(path.join(__dirname, './public/notes.html')); 
 });
 
+//Get route for homepage
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/index.html'))
+}); 
 
 
 app.listen(PORT, () =>
