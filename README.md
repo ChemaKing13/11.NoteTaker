@@ -13,7 +13,7 @@ This project is a note-taking application that allows users to create, save, and
 - [License](#license)
 - [Usage](#Usage)
 - [Credits](#credits)
-- [Demo](#demo)
+- [Link](#Link)
 
 ## Built With
 
@@ -48,6 +48,7 @@ In order to complete this challenge, I applied the knowledge seen in class, as w
 - https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 
 
-## Link 
+## Link
 
-You can watch the demo video [here](https://drive.google.com/file/d/1qWe62GQoMg3qEuoKM07mdMFp9pGyc-A_/view).
+You can access the deployed app [here](https://fierce-meadow-00995.herokuapp.com/).
+
